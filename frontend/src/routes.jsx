@@ -4,6 +4,7 @@ import { apiService } from "./services/apiService";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import LayoutPage from "./pages/LayoutPage";
+import { LivrosProvider } from "./common/context/Livros";
 
 function AppRoutes() {
   const [livros, setLivros] = useState([]);
@@ -20,11 +21,13 @@ function AppRoutes() {
   return (
     <>
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<LayoutPage />}>
-            <Route index element={<Home />} />
-          </Route>
-        </Routes>
+        <LivrosProvider>
+          <Routes>
+            <Route path="/" element={<LayoutPage />}>
+              <Route index element={<Home />} />
+            </Route>
+          </Routes>
+        </LivrosProvider>
       </BrowserRouter>
     </>
   );

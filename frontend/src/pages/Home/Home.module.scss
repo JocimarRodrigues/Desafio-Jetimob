@@ -1,7 +1,16 @@
 .container {
-    display: flex;
+    display: block;
     max-width: 90%;
     margin: auto;
     padding-top: 50px;
-
+    .cards {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-between;
+        .card {
+            display: flex;
+            flex-direction: column;
+            border: 10px solid white;
+        }
+    }
 }

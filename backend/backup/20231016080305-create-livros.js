@@ -22,10 +22,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       imagem: {
-        type: Sequelize.BLOB
-      },
-      dataEdicao: {
-        type: Sequelize.DATEONLY
+        type: Sequelize.STRING
       },
       createdAt: {
         allowNull: false,

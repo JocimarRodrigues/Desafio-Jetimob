@@ -1,0 +1,65 @@
+.container {
+  display: flex;
+  width: 100vw;
+  height: 90vh;
+
+  form {
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    .infos {
+      width: 100%;
+      margin: 15px;
+      display: grid;
+      grid-template-columns: 2;
+      grid-template-rows: 2;
+      gap: 15px;
+      :nth-child(1) {
+        grid-column: 1;
+      }
+      :nth-child(2) {
+        grid-column: 1;
+      }
+      :nth-child(3) {
+        grid-column: 2;
+        grid-row: 1;
+      }
+      input {
+        width: 300px;
+        height: 40px;
+        border-radius: 15px;
+        padding: 5px;
+      }
+    }
+    .resenha {
+      margin: 15px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      textarea {
+        display: flex;
+        width: 80%;
+        border-radius: 10px;
+        padding: 15px;
+      }
+    }
+    .imagem {
+      margin: 15px;
+    }
+    button {
+      margin-top: 15px;
+      width: 200px;
+      height: 40px;
+      font-size: 13pt;
+      border: none;
+      border-radius: 15px;
+      &:hover {
+        transition: 1s;
+        color: white;
+        background-color: #002a66;
+      }
+    }
+  }
+}

@@ -1,15 +1,26 @@
 import api from "../api/api";
 
 export const pegaTodosOslivros = async () => {
-    try {
-        const response = await api.get("/livros");
-        const data = response.data;
-        return data;
-    } catch (error) {
-        console.log(error.message)
-    }
-}
+  try {
+    const response = await api.get("/livros");
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error.message);
+  }
+};
+
+export const adicionarLivro = async (dados) => {
+  try {
+    const response = await api.post("/livros", dados);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const apiService = {
-    pegaTodosOslivros
-}
+  pegaTodosOslivros,
+  adicionarLivro,
+};

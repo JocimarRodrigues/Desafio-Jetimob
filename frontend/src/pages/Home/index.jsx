@@ -22,6 +22,7 @@ const Home = () => {
         <div className={styles.cards}>
           {livros.map((item) => (
             <div key={item.id} className={styles.card}>
+              <img src={item.imagem} alt={item.titulo} />
               <h1>{item.titulo}</h1>
               <h2>{item.autor}</h2>
               <h3>{item.classificacao}</h3>

@@ -1,7 +1,8 @@
-import  { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import styles from "./Formulario.module.scss";
 import { apiService } from "../../services/apiService";
 import { LivrosContext } from "../../common/context/Livros";
+import PropTypes from "prop-types";
 
 const Formulario = ({ tipoDeFormulario }) => {
   const [dadosFormulario, setDadosFormulario] = useState({
@@ -14,17 +15,15 @@ const Formulario = ({ tipoDeFormulario }) => {
 
   const { idLivro, livro, setLivro } = useContext(LivrosContext);
 
-
-
   useEffect(() => {
     const pegaDadosParaEditar = async (idLivro) => {
-      if(tipoDeFormulario === "editar") {
-        const dadosLivro = await apiService.pegaUmLivro(idLivro)
-        setLivro(dadosLivro)
+      if (tipoDeFormulario === "editar") {
+        const dadosLivro = await apiService.pegaUmLivro(idLivro);
+        setLivro(dadosLivro);
       }
-    }
-    pegaDadosParaEditar(idLivro)
-  }, [idLivro, setLivro, tipoDeFormulario])
+    };
+    pegaDadosParaEditar(idLivro);
+  }, [idLivro, setLivro, tipoDeFormulario]);
 
   const aoMudarInput = (e) => {
     const { name, value } = e.target;
@@ -36,29 +35,35 @@ const Formulario = ({ tipoDeFormulario }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-
     switch (tipoDeFormulario) {
       case "adicionar":
         await apiService.adicionarLivro(dadosFormulario);
         alert("Livro adicionado com sucesso!");
         break;
       case "editar":
-      if (livro) {
-
-        const dadosEditados = {
-          titulo: dadosFormulario.titulo ? dadosFormulario.titulo : livro.titulo,
-          autor: dadosFormulario.autor ? dadosFormulario.autor : livro.autor,
-          classificacao: dadosFormulario.classificacao ? dadosFormulario.classificacao : livro.classificacao,
-          resenha: dadosFormulario.resenha ? dadosFormulario.resenha : livro.resenha,
-          imagem: dadosFormulario.imagem ? dadosFormulario.imagem : livro.imagem,
+        if (livro) {
+          const dadosEditados = {
+            titulo: dadosFormulario.titulo
+              ? dadosFormulario.titulo
+              : livro.titulo,
+            autor: dadosFormulario.autor ? dadosFormulario.autor : livro.autor,
+            classificacao: dadosFormulario.classificacao
+              ? dadosFormulario.classificacao
+              : livro.classificacao,
+            resenha: dadosFormulario.resenha
+              ? dadosFormulario.resenha
+              : livro.resenha,
+            imagem: dadosFormulario.imagem
+              ? dadosFormulario.imagem
+              : livro.imagem,
+          };
+          await apiService.editarLivro(idLivro, dadosEditados);
+          alert("Livro Editado com sucesso!");
         }
-        
-        await apiService.editarLivro(idLivro, dadosEditados);
-      }
-
-        }
-        alert("Livro Editado com sucesso!");
     }
+    setDadosFormulario("");
+    setLivro("");
+  };
   return (
     <div className={styles.container}>
       <form onSubmit={onSubmit}>
@@ -85,7 +90,9 @@ const Formulario = ({ tipoDeFormulario }) => {
           <input
             type="number"
             name="classificacao"
-            placeholder={livro ? livro.classificacao : "Dê uma nota de 1 a 5 para o livro."}
+            placeholder={
+              livro ? livro.classificacao : "Dê uma nota de 1 a 5 para o livro."
+            }
             max={5}
             min={0}
             value={dadosFormulario.classificacao}
@@ -119,3 +126,7 @@ const Formulario = ({ tipoDeFormulario }) => {
 };
 
 export default Formulario;
+
+Formulario.propTypes = {
+  tipoDeFormulario: PropTypes.string,
+};

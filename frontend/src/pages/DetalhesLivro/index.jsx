@@ -25,6 +25,15 @@ const DetalhesLivro = () => {
     navigate(`/editarLivro/${id}`);
   };
 
+  const deletarLivro = async (id) => {
+    const confirmar = confirm("Você tem certeza que deseja excluir este livro?")
+    if(confirmar) {
+      await apiService.excluirLivro(id)
+      alert("Livro excluido com sucesso!")
+      navigate("/")
+    }
+  }
+
   return (
     <div className={styles.container}>
       {livro ? (
@@ -41,7 +50,7 @@ const DetalhesLivro = () => {
 
           <div className={styles.buttons}>
             <button onClick={() => editarLivro(livro.id)}>Editar</button>
-            <button>Excluir</button>
+            <button onClick={() => deletarLivro(livro.id)}>Excluir</button>
           </div>
         </>
       ) : (

@@ -12,13 +12,13 @@ export const pegaTodosOslivros = async () => {
 
 export const pegaUmLivro = async (id) => {
   try {
-    const response = await api.get(`/livros/${id}`)
-    const data = response.data
+    const response = await api.get(`/livros/${id}`);
+    const data = response.data;
     return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
 
 export const adicionarLivro = async (dados) => {
   try {
@@ -32,17 +32,28 @@ export const adicionarLivro = async (dados) => {
 
 export const editarLivro = async (id, novasInfos) => {
   try {
-    const response = await api.put(`/livros/${id}`, novasInfos)
+    const response = await api.put(`/livros/${id}`, novasInfos);
     const data = response.data;
     return data;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-}
+};
+
+export const excluirLivro = async (id) => {
+  try {
+    const response = await api.delete(`/livros/${id}`);
+    const data = response.data;
+    return data;
+  } catch (error) {
+    console.log(error);
+  }
+};
 
 export const apiService = {
   pegaTodosOslivros,
   pegaUmLivro,
   adicionarLivro,
   editarLivro,
+  excluirLivro,
 };

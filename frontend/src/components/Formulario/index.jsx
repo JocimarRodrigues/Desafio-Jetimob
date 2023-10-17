@@ -1,15 +1,30 @@
-import React, { useState } from "react";
+import  { useContext, useEffect, useState } from "react";
 import styles from "./Formulario.module.scss";
 import { apiService } from "../../services/apiService";
+import { LivrosContext } from "../../common/context/Livros";
 
 const Formulario = ({ tipoDeFormulario }) => {
   const [dadosFormulario, setDadosFormulario] = useState({
     titulo: "",
     autor: "",
-    classificacao: 0,
+    classificacao: "",
     resenha: "",
     imagem: "",
   });
+
+  const { idLivro, livro, setLivro } = useContext(LivrosContext);
+
+
+
+  useEffect(() => {
+    const pegaDadosParaEditar = async (idLivro) => {
+      if(tipoDeFormulario === "editar") {
+        const dadosLivro = await apiService.pegaUmLivro(idLivro)
+        setLivro(dadosLivro)
+      }
+    }
+    pegaDadosParaEditar(idLivro)
+  }, [idLivro, setLivro, tipoDeFormulario])
 
   const aoMudarInput = (e) => {
     const { name, value } = e.target;
@@ -26,10 +41,24 @@ const Formulario = ({ tipoDeFormulario }) => {
       case "adicionar":
         await apiService.adicionarLivro(dadosFormulario);
         alert("Livro adicionado com sucesso!");
-    }
-    console.log(dadosFormulario);
-  };
+        break;
+      case "editar":
+      if (livro) {
 
+        const dadosEditados = {
+          titulo: dadosFormulario.titulo ? dadosFormulario.titulo : livro.titulo,
+          autor: dadosFormulario.autor ? dadosFormulario.autor : livro.autor,
+          classificacao: dadosFormulario.classificacao ? dadosFormulario.classificacao : livro.classificacao,
+          resenha: dadosFormulario.resenha ? dadosFormulario.resenha : livro.resenha,
+          imagem: dadosFormulario.imagem ? dadosFormulario.imagem : livro.imagem,
+        }
+        
+        await apiService.editarLivro(idLivro, dadosEditados);
+      }
+
+        }
+        alert("Livro Editado com sucesso!");
+    }
   return (
     <div className={styles.container}>
       <form onSubmit={onSubmit}>
@@ -38,38 +67,38 @@ const Formulario = ({ tipoDeFormulario }) => {
           <input
             type="text"
             name="titulo"
-            placeholder="Digite um titulo"
+            placeholder={livro ? livro.titulo : "Digite um titulo"}
             value={dadosFormulario.titulo}
             onChange={aoMudarInput}
-            required
+            required={tipoDeFormulario === "adicionar" ? true : false}
           />
 
           <input
             type="text"
             name="autor"
-            placeholder="Digite o nome do Autor"
+            placeholder={livro ? livro.autor : "Digite o nome do Autor"}
             value={dadosFormulario.autor}
             onChange={aoMudarInput}
-            required
+            required={tipoDeFormulario === "adicionar" ? true : false}
           />
 
           <input
             type="number"
             name="classificacao"
-            placeholder="Dê uma nota de 1 a 5 para o livro."
+            placeholder={livro ? livro.classificacao : "Dê uma nota de 1 a 5 para o livro."}
             max={5}
             min={0}
             value={dadosFormulario.classificacao}
             onChange={aoMudarInput}
-            required
+            required={tipoDeFormulario === "adicionar" ? true : false}
           />
           <input
             type="url"
             name="imagem"
-            placeholder="Insira o link da imagem"
+            placeholder={livro ? livro.imagem : "Insira o link da imagem"}
             value={dadosFormulario.imagem}
             onChange={aoMudarInput}
-            required
+            required={tipoDeFormulario === "adicionar" ? true : false}
           />
         </div>
         <h1>Resenha</h1>
@@ -80,7 +109,7 @@ const Formulario = ({ tipoDeFormulario }) => {
             rows="10"
             value={dadosFormulario.resenha}
             onChange={aoMudarInput}
-            required
+            required={tipoDeFormulario === "adicionar" ? true : false}
           ></textarea>
         </div>
         <button type="submit">Adicionar Livro</button>

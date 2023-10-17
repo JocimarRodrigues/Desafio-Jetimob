@@ -1,11 +1,13 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { apiService } from "../../services/apiService";
 import { LivrosContext } from "../../common/context/Livros";
 import styles from "./DetalhesLivro.module.scss";
+import { useNavigate } from "react-router-dom";
 
 const DetalhesLivro = () => {
   const [livro, setLivro] = useState();
-  const { idLivro } = useContext(LivrosContext);
+  const { idLivro, setIdLivro } = useContext(LivrosContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const pegaDetalhesLivro = async (idLivro) => {
@@ -17,6 +19,11 @@ const DetalhesLivro = () => {
       pegaDetalhesLivro(idLivro);
     }
   }, [idLivro]);
+
+  const editarLivro = (id) => {
+    setIdLivro(id);
+    navigate(`/editarLivro/${id}`);
+  };
 
   return (
     <div className={styles.container}>
@@ -33,7 +40,7 @@ const DetalhesLivro = () => {
           </div>
 
           <div className={styles.buttons}>
-            <button>Editar</button>
+            <button onClick={() => editarLivro(livro.id)}>Editar</button>
             <button>Excluir</button>
           </div>
         </>

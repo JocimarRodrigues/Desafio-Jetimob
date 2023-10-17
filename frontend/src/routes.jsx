@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import LayoutPage from "./pages/LayoutPage";
 import { LivrosProvider } from "./common/context/Livros";
 import NovoLivro from "./pages/NovoLivro";
+import Livro from "./pages/DetalhesLivro";
 
 function AppRoutes() {
   const [livros, setLivros] = useState([]);
@@ -27,6 +28,7 @@ function AppRoutes() {
             <Route path="/" element={<LayoutPage />}>
               <Route index element={<Home />} />
               <Route path="novoLivro" element={<NovoLivro />} />
+              <Route path="detalhesLivro/:id" element={<Livro />} />
             </Route>
           </Routes>
         </LivrosProvider>

@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  padding: 40px;
+  width: max-content;
+  margin: auto;
+  .imagem {
+    width: auto;
+    img {
+      height: 50vh;
+    }
+  }
+  .conteudo {
+    margin: 0 40px 0 40px;
+  }
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    :nth-child(1) {
+      margin-bottom: 1em;
+    }
+  }
+}

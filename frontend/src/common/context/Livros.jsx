@@ -6,12 +6,16 @@ LivrosContext.displayName = "Contexto De Livros";
 
 export const LivrosProvider = ({ children }) => {
   const [livros, setLivros] = useState([]);
+  const [idLivro, setIdLivro] = useState(0)
+
 
   return (
     <LivrosContext.Provider
       value={{
         livros,
         setLivros,
+        idLivro,
+        setIdLivro
       }}
     >
       {children}

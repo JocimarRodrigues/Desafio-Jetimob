@@ -10,6 +10,16 @@ export const pegaTodosOslivros = async () => {
   }
 };
 
+export const pegaUmLivro = async (id) => {
+  try {
+    const response = await api.get(`/livros/${id}`)
+    const data = response.data
+    return data;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export const adicionarLivro = async (dados) => {
   try {
     const response = await api.post("/livros", dados);
@@ -22,5 +32,6 @@ export const adicionarLivro = async (dados) => {
 
 export const apiService = {
   pegaTodosOslivros,
+  pegaUmLivro,
   adicionarLivro,
 };

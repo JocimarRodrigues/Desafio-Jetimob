@@ -1,7 +1,13 @@
+@import "../../styles/variaveis";
+
 .container {
   display: flex;
   width: 100vw;
   height: 90vh;
+  h1 {
+    margin: 15px 0 15px 0;
+    font-size: $tamanho-titulo;
+  }
 
   form {
     margin: auto;

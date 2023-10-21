@@ -69,3 +69,25 @@
     }
   }
 }
+
+@media (min-width: 360px) and (max-width: 425px) {
+  .container {
+    text-align: center;
+    display: flex;
+    form {
+     .infos {
+      display: flex;
+      flex-direction: column;
+      input {
+        padding-left: 20px;
+        width: 300px;
+      }
+     }
+    }
+    .resenha {
+      textarea {
+        padding: 0;
+      }
+    }
+  }
+}

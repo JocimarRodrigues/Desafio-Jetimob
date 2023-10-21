@@ -119,7 +119,9 @@ const Formulario = ({ tipoDeFormulario }) => {
             required={tipoDeFormulario === "adicionar" ? true : false}
           ></textarea>
         </div>
-        <button type="submit">Adicionar Livro</button>
+        <button type="submit">
+          {tipoDeFormulario === "adicionar" ? "Adicionar Livro" : "Editar"}
+        </button>
       </form>
     </div>
   );

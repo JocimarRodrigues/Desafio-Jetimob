@@ -25,7 +25,7 @@ const Home = () => {
   return (
     <>
       <div className={styles.container}>
-        <h1>Livros recomendados pelos nossos colaboradores</h1>
+        <h1>Livros recomendados por nossos colaboradores</h1>
 
         <div className={styles.cards}>
           {livros.map((item) => (

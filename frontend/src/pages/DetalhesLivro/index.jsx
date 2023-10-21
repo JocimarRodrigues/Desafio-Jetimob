@@ -1,8 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { apiService } from "../../services/apiService";
 import { LivrosContext } from "../../common/context/Livros";
-import styles from "./DetalhesLivro.module.scss";
 import { useNavigate } from "react-router-dom";
+import { AiTwotoneEdit, AiFillDelete } from "react-icons/ai";
+import styles from "./DetalhesLivro.module.scss";
+import Classificacao from "../../components/Classificacao";
 
 const DetalhesLivro = () => {
   const [livro, setLivro] = useState();
@@ -26,32 +28,48 @@ const DetalhesLivro = () => {
   };
 
   const deletarLivro = async (id) => {
-    const confirmar = confirm("Você tem certeza que deseja excluir este livro?")
-    if(confirmar) {
-      await apiService.excluirLivro(id)
-      alert("Livro excluido com sucesso!")
-      navigate("/")
+    const confirmar = confirm(
+      "Você tem certeza que deseja excluir este livro?"
+    );
+    if (confirmar) {
+      await apiService.excluirLivro(id);
+      alert("Livro excluido com sucesso!");
+      navigate("/");
     }
-  }
+  };
 
   return (
     <div className={styles.container}>
       {livro ? (
         <>
-          <div className={styles.imagem}>
+          <div className={styles.card}>
             <img src={livro.imagem} alt="" />
+            <h1>{livro.titulo}</h1>
+            <h2>Autor: {livro.autor}</h2>
+            {/* <h3>Idmb: {livro.classificacao}</h3> */}
+            <Classificacao classificacao={livro.classificacao} />
           </div>
           <div className={styles.conteudo}>
-            <h1>{livro.titulo}</h1>
-            <h2>{livro.autor}</h2>
-            <h3>{livro.classificacao}</h3>
+            <h1>Resenha</h1>
             <p>{livro.resenha}</p>
+            <p>
+              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
+              Assumenda perspiciatis illo voluptas. Numquam ipsam et quia
+              asperiores ullam? Quos neque inventore delectus id, aspernatur
+              laboriosam ipsum saepe et facere eaque!
+            </p>
+            {/* <AiTwotoneEdit onClick={() => editarLivro(livro.id)} cursor={"pointer"}/>
+            <AiFillDelete onClick={() => deletarLivro(livro.id)} cursor={"pointer"}/> */}
+            <button onClick={() => editarLivro(livro.id)} className={styles.editar}>
+              Editar <AiTwotoneEdit />
+            </button>
+            <button onClick={() => deletarLivro(livro.id)} className={styles.excluir}>
+              Excluir <AiFillDelete />
+            </button>
           </div>
-
+          {/* 
           <div className={styles.buttons}>
-            <button onClick={() => editarLivro(livro.id)}>Editar</button>
-            <button onClick={() => deletarLivro(livro.id)}>Excluir</button>
-          </div>
+          </div> */}
         </>
       ) : (
         <div>

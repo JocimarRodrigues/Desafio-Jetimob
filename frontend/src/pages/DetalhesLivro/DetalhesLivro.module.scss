@@ -1,22 +1,53 @@
 .container {
   display: flex;
-  padding: 40px;
-  width: max-content;
-  margin: auto;
-  .imagem {
+  // padding: 30px;
+  width: 100%;
+  margin-top: 30px;
+  .card {
     width: auto;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 1px, rgba(0, 0, 0, 0.07) 0px 2px 2px,
+      rgba(0, 0, 0, 0.07) 0px 4px 4px, rgba(0, 0, 0, 0.07) 0px 8px 8px,
+      rgba(0, 0, 0, 0.07) 0px 16px 16px;
+
+    padding: 10px;
+    margin: 15px;
     img {
       height: 50vh;
+    }
+    h2 {
+      color: rgb(129, 127, 127);
     }
   }
   .conteudo {
     margin: 0 40px 0 40px;
-  }
-  .buttons {
-    display: flex;
-    flex-direction: column;
-    :nth-child(1) {
-      margin-bottom: 1em;
+    h1 {
+      font-size: 3.5rem;
+    }
+    button {
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      border-radius: 5px;
+      height: 1.5em;
+      width: 6em;
+      cursor: pointer;
+      font-size: 1.2rem;
+      margin-top: 15px;
+      margin-right: 15px;
+    }
+    .editar {
+      transition: 1s;
+      &:hover {
+        color: white;
+        background-color: blue;
+      }
+    }
+    .excluir {
+      transition: 1s;
+      &:hover {
+        color: white;
+        background-color: red;
+      }
     }
   }
 }

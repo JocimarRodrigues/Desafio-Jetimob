@@ -9,18 +9,26 @@ import Classificacao from "../../components/Classificacao";
 const DetalhesLivro = () => {
   const [livro, setLivro] = useState();
   const { idLivro, setIdLivro } = useContext(LivrosContext);
+
   const navigate = useNavigate();
 
   useEffect(() => {
     const pegaDetalhesLivro = async (idLivro) => {
       const detalhesLivro = await apiService.pegaUmLivro(idLivro);
+
       setLivro(detalhesLivro);
+  
     };
 
+
+
     if (idLivro) {
+
       pegaDetalhesLivro(idLivro);
     }
   }, [idLivro]);
+
+
 
   const editarLivro = (id) => {
     setIdLivro(id);
@@ -46,14 +54,12 @@ const DetalhesLivro = () => {
             <img src={livro.imagem} alt="" />
             <h1>{livro.titulo}</h1>
             <h2>Autor: {livro.autor}</h2>
-            {/* <h3>Idmb: {livro.classificacao}</h3> */}
+            <h2>Adicionado: {livro.createdAt.split('T')[0]}</h2>
             <Classificacao classificacao={livro.classificacao} />
           </div>
           <div className={styles.conteudo}>
             <h1>Resenha</h1>
             <p>{livro.resenha}</p>
-            {/* <AiTwotoneEdit onClick={() => editarLivro(livro.id)} cursor={"pointer"}/>
-            <AiFillDelete onClick={() => deletarLivro(livro.id)} cursor={"pointer"}/> */}
             <button onClick={() => editarLivro(livro.id)} className={styles.editar}>
               Editar <AiTwotoneEdit />
             </button>
@@ -61,9 +67,7 @@ const DetalhesLivro = () => {
               Excluir <AiFillDelete />
             </button>
           </div>
-          {/* 
-          <div className={styles.buttons}>
-          </div> */}
+
         </>
       ) : (
         <div>

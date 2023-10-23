@@ -3,6 +3,8 @@ import styles from "./Home.module.scss";
 import { apiService } from "../../services/apiService";
 import { LivrosContext } from "../../common/context/Livros";
 import { useNavigate } from "react-router-dom";
+import Classificacao from "../../components/Classificacao";
+
 
 const Home = () => {
   const { livros, setLivros } = useContext(LivrosContext);
@@ -33,7 +35,7 @@ const Home = () => {
               <img src={item.imagem} alt={item.titulo} />
               <h1>{item.titulo}</h1>
               <h2>{item.autor}</h2>
-              <h3>{item.classificacao}</h3>
+              <Classificacao classificacao={item.classificacao}/>
               <button onClick={() => irParaDetalhes(item.id)}>Detalhes</button>
             </div>
           ))}

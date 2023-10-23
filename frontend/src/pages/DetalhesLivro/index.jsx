@@ -17,18 +17,12 @@ const DetalhesLivro = () => {
       const detalhesLivro = await apiService.pegaUmLivro(idLivro);
 
       setLivro(detalhesLivro);
-  
     };
 
-
-
     if (idLivro) {
-
       pegaDetalhesLivro(idLivro);
     }
   }, [idLivro]);
-
-
 
   const editarLivro = (id) => {
     setIdLivro(id);
@@ -54,20 +48,25 @@ const DetalhesLivro = () => {
             <img src={livro.imagem} alt="" />
             <h1>{livro.titulo}</h1>
             <h2>Autor: {livro.autor}</h2>
-            <h2>Adicionado: {livro.createdAt.split('T')[0]}</h2>
+            <h2>Adicionado: {livro.createdAt.split("T")[0]}</h2>
             <Classificacao classificacao={livro.classificacao} />
           </div>
           <div className={styles.conteudo}>
             <h1>Resenha</h1>
             <p>{livro.resenha}</p>
-            <button onClick={() => editarLivro(livro.id)} className={styles.editar}>
+            <button
+              onClick={() => editarLivro(livro.id)}
+              className={styles.editar}
+            >
               Editar <AiTwotoneEdit />
             </button>
-            <button onClick={() => deletarLivro(livro.id)} className={styles.excluir}>
+            <button
+              onClick={() => deletarLivro(livro.id)}
+              className={styles.excluir}
+            >
               Excluir <AiFillDelete />
             </button>
           </div>
-
         </>
       ) : (
         <div>

@@ -114,6 +114,7 @@ const Formulario = ({ tipoDeFormulario }) => {
             name="resenha"
             cols="30"
             rows="10"
+            placeholder={livro ? livro.resenha : "Insira uma descrição para o livro"}
             value={dadosFormulario.resenha}
             onChange={aoMudarInput}
             required={tipoDeFormulario === "adicionar" ? true : false}

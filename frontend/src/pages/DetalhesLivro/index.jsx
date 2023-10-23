@@ -52,12 +52,6 @@ const DetalhesLivro = () => {
           <div className={styles.conteudo}>
             <h1>Resenha</h1>
             <p>{livro.resenha}</p>
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Assumenda perspiciatis illo voluptas. Numquam ipsam et quia
-              asperiores ullam? Quos neque inventore delectus id, aspernatur
-              laboriosam ipsum saepe et facere eaque!
-            </p>
             {/* <AiTwotoneEdit onClick={() => editarLivro(livro.id)} cursor={"pointer"}/>
             <AiFillDelete onClick={() => deletarLivro(livro.id)} cursor={"pointer"}/> */}
             <button onClick={() => editarLivro(livro.id)} className={styles.editar}>

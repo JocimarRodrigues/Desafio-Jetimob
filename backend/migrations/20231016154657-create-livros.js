@@ -19,7 +19,7 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       resenha: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       imagem: {
         type: Sequelize.STRING

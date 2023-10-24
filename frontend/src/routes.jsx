@@ -1,5 +1,3 @@
-import { useEffect, useState } from "react";
-import { apiService } from "./services/apiService";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/Home";
 import LayoutPage from "./pages/LayoutPage";
@@ -7,29 +5,32 @@ import { LivrosProvider } from "./common/context/Livros";
 import NovoLivro from "./pages/NovoLivro";
 import Livro from "./pages/DetalhesLivro";
 import EditarLivro from "./pages/EditarLivro";
+import { useEffect, useState } from "react";
 
 function AppRoutes() {
-  const [livros, setLivros] = useState([]);
+  const [admin, setAdmin] = useState(false);
 
   useEffect(() => {
-    const pegaDados = async () => {
-      const livro = await apiService.pegaTodosOslivros();
-      setLivros(livro);
+    const auth = () => {
+      const senha = import.meta.env.VITE_NAME;
+      const senhaInserida = prompt("Digite a senha");
+      if (senhaInserida === senha) {
+        setAdmin(true);
+      }
     };
-    pegaDados();
+    auth();
   }, []);
 
-  console.log(livros);
   return (
     <>
       <BrowserRouter>
         <LivrosProvider>
           <Routes>
             <Route path="/" element={<LayoutPage />}>
-              <Route index element={<Home />} />
-              <Route path="novoLivro" element={<NovoLivro />} />
-              <Route path="editarLivro/:id" element={<EditarLivro />} />
-              <Route path="detalhesLivro/:id" element={<Livro />} />
+              <Route index element={admin ? <Home /> : ""} />
+              <Route path="novoLivro" element={admin ? <NovoLivro /> : ""} />
+              <Route path="editarLivro/:id" element={admin ? <EditarLivro /> : ""} />
+              <Route path="detalhesLivro/:id" element={admin ? <Livro /> : ""} />
             </Route>
           </Routes>
         </LivrosProvider>
